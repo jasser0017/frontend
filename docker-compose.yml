@@ -1,0 +1,30 @@
+version: '3.5'
+services:
+
+  front:
+    build:
+      context: ${MS_BASE_PATH}
+      dockerfile: ${MS_BASE_PATH}/DockerFile.dev
+    container_name: ${PROJECT_NAME}-${MS_NAME}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.front.rule=Host(`www.${DOMAIN}`) || Host(`${DOMAIN}`)"
+      - "traefik.http.routers.front.entrypoints=web"
+      - "traefik.http.routers.front.service=frontService"
+      - "traefik.http.services.frontService.loadBalancer.server.port=${HTTP_PORT}"
+      - "traefik.http.routers.frontService.middlewares=my-cors"
+    env_file: ${MS_BASE_PATH}/.env
+    restart: always
+    ports:
+      - ${HTTP_PORT}:${HTTP_PORT}
+    volumes:
+      - ${MS_BASE_PATH}/:/src
+    networks:
+      - relay-net
+    environment:
+      - TZ=Africa/Tunis
+
+networks:
+  relay-net:
+    name: "${PROJECT_NAME}-${RELAY_NETWORK}"
+    external: true
