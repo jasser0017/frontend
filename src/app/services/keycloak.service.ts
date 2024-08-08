@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../model/user';
+import Keycloak from 'keycloak-js';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ import { User } from '../model/user';
 export class KeycloakService {
 
 
-  /* _keycloak: Keycloak.KeycloakInstance | undefined ;
+   _keycloak: Keycloak | undefined ;
     private user :User | undefined;
   constructor() { }
 
@@ -15,12 +16,13 @@ export class KeycloakService {
       try {
         // Initialize Keycloak
         this._keycloak = new Keycloak({
-          url: 'http://localhost:8080',
-          realm: 'demo-app',
-          clientId: 'demo',
+          url: 'http://localhost:9091',
+          realm: 'toothtrack',
+          clientId: 'toothtrack-app',
         });
   
         this._keycloak.init({ onLoad: 'check-sso' }).then((authenticated) => {
+          console.log("token valid")
           if (!authenticated) {
             this.login();
           }
@@ -48,6 +50,6 @@ export class KeycloakService {
           reject('Not authenticated');
         }
       });
-    }*/
+    }
   
 }

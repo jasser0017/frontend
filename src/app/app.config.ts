@@ -4,21 +4,26 @@ import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { KeycloakService } from './services/keycloak.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InterceptorService } from './services/interceptor.service';
 
-/*export function initializeKeycloak(keycloak: KeycloakService) {
-
-  return () =>
-      keycloak.init();
-}*/
+export function kcFactory (kcSecurity:KeycloakService){
+  return ()=> kcSecurity.init()
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes),
+
+    {provide:APP_INITIALIZER ,deps:[KeycloakService],
+      useFactory:kcFactory,multi:true},
+      
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: InterceptorService,
+        multi: true
+      },
     
-  /*      {
-          provide: APP_INITIALIZER,
-          useFactory: initializeKeycloak,
-          multi: true,
-          deps: [KeycloakService]
-        },*/
+    
+  
     provideClientHydration()]
 };
