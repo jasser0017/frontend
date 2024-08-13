@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { User } from '../model/user';
 import Keycloak from 'keycloak-js';
+import { Observable, map,BehaviorSubject, from } from 'rxjs';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,8 @@ export class KeycloakService {
 
    _keycloak: Keycloak | undefined ;
     private user :User | undefined;
-  constructor() { }
+    private _userSubject = new BehaviorSubject<any>(null);
+  constructor(private storageService: StorageService) { }
 
     async init(): Promise<void> {
       try {
@@ -21,11 +24,15 @@ export class KeycloakService {
           clientId: 'toothtrack-app',
         });
   
-        this._keycloak.init({ onLoad: 'check-sso' }).then((authenticated) => {
-          console.log("token valid")
-          if (!authenticated) {
-            this.login();
+        this._keycloak.init({ onLoad: 'login-required' }).then((authenticated) => {
+          if (authenticated) {
+            this.storageService.setRoles(this._keycloak.tokenParsed.realm_access.roles);
+          } else {
+            // This block is redundant with 'login-required', but you can use it for additional handling if needed
+            console.log('User is not authenticated.');
           }
+        }).catch((error) => {
+          console.error('Keycloak initialization failed', error);
         });
 
        
@@ -36,6 +43,7 @@ export class KeycloakService {
 
     login() {
       this._keycloak?.login();
+      console.log('token'+this._keycloak.token)
     }
   
     logout() {
@@ -51,5 +59,19 @@ export class KeycloakService {
         }
       });
     }
+    
+
+    get token$(): Observable<string> {
+      return from(this._keycloak?.updateToken(10) || Promise.resolve()).pipe(
+        map(() => this._keycloak?.token || ''),
+        map(token => token)
+      );
+    }
   
-}
+  
+    
+  
+  }
+    
+  
+
