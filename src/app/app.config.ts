@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { KeycloakService } from './services/keycloak.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './services/interceptor.service';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export function kcFactory (kcSecurity:KeycloakService){
   return ()=> kcSecurity.init()
@@ -25,5 +26,5 @@ export const appConfig: ApplicationConfig = {
     
     
   
-    provideClientHydration()]
+    provideClientHydration(), provideAnimationsAsync()]
 };

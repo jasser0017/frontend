@@ -16,7 +16,8 @@ export class NavbarComponent implements OnInit {
 
    role:String =""
 
-  constructor(private storageService: StorageService) { }
+  constructor(private storageService: StorageService,
+    private router :Router) { }
 
   ngOnInit(): void {
     this.storageService.roles$.subscribe(roles => {
@@ -24,4 +25,9 @@ export class NavbarComponent implements OnInit {
       console.log('Roles in Component B:', roles);
     });
   }
+  redirect()
+  {
+    this.router.navigate(['/historique'])
+  }
+  
 }
