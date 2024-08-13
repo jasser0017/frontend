@@ -1,32 +1,53 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
-import { User } from './model/user';
-import { KeycloakService } from './services/keycloak.service';
+import {  Router, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
-import { NavbarComponent } from './navbar/navbar.component';
-import { HomeComponent } from './home/home.component';
-import { ServiceComponent } from './service/service.component';
 import { FooterComponent } from './footer/footer.component';
-import { AppointmentComponent } from './appointment/appointment.component';
+import { StorageService } from './services/storage.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, NavbarComponent, FooterComponent],
+  imports: [RouterOutlet, CommonModule,  FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit{
-  keycloakService!: KeycloakService
-  constructor() {}
-  ngOnInit(): void {
-   
-  }
+  role:String =""
+ 
+  constructor(private storageService: StorageService,
+    private router :Router) { }
 
-  logout() {
-   // this.keycloakService.logout();
-   
+  ngOnInit(): void {
+    this.storageService.roles$.subscribe(roles => {
+      this.role=roles[0]
+      console.log('Roles in Component B:', roles);
+    });
+  }
+  getLinks() {
+    switch (this.role) {
+      case 'admin':
+        return [
+          { path: 'admin/gestion-receptionist', label: 'Gerer Receptionist' },
+          { path: 'admin/add-theropy', label: 'Gerer Therapis' },
+          { path: 'admin/historique', label: 'Historique' }
+        ];
+      case 'receptionist':
+        return [
+          { path: 'receptionist/gestionrdv', label: 'Gerer Rendez-Vous' }
+        ];
+      case 'patient':
+        return [
+          { path: 'home', label: 'Home' },
+          { path: 'header/about', label: 'About' },
+          { path: 'header/services', label: 'Service' },
+          { path: 'header/price', label: 'Pricing Plan' },
+          { path: 'testimonial', label: 'Testimonial' },
+          { path: 'patient/appointment', label: 'Appointment' },
+          { path: 'patient/contact', label: 'Contact' }
+        ];
+      default:
+        return [];
+    }
   }
 
 }

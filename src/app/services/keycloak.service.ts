@@ -19,13 +19,14 @@ export class KeycloakService {
       try {
         // Initialize Keycloak
         this._keycloak = new Keycloak({
-          url: 'http://localhost:9091',
-          realm: 'toothtrack',
-          clientId: 'toothtrack-app',
+          url: 'http://localhost:8080',
+          realm: 'demo-app',
+          clientId: 'demo',
         });
   
         this._keycloak.init({ onLoad: 'login-required' }).then((authenticated) => {
           if (authenticated) {
+            console.log(this._keycloak.token)
             this.storageService.setRoles(this._keycloak.tokenParsed.realm_access.roles);
           } else {
             // This block is redundant with 'login-required', but you can use it for additional handling if needed
