@@ -13,17 +13,26 @@ import { StorageService } from './services/storage.service';
 })
 export class AppComponent implements OnInit{
   role:String =""
+  
  
   constructor(private storageService: StorageService,
     private router :Router) { }
 
   ngOnInit(): void {
     this.storageService.roles$.subscribe(roles => {
-      this.role=roles[0]
-      console.log('Roles in Component B:', roles);
+      if(roles.includes("admin")){
+        this.role="admin"
+      }else if(roles.includes("patient")){
+        this.role="patient"
+      }else{
+        this.role="receptionist"
+      }
+      console.log('Roles in Component :',  this.role);
     });
   }
   getLinks() {
+
+    
     switch (this.role) {
       case 'admin':
         return [
@@ -40,9 +49,9 @@ export class AppComponent implements OnInit{
           { path: 'home', label: 'Home' },
           { path: 'header/about', label: 'About' },
           { path: 'header/services', label: 'Service' },
-          { path: 'header/price', label: 'Pricing Plan' },
-          { path: 'testimonial', label: 'Testimonial' },
-          { path: 'patient/appointment', label: 'Appointment' },
+          
+          { path: 'patient/testimonial', label: 'Testimonial'},
+          
           { path: 'patient/contact', label: 'Contact' }
         ];
       default:

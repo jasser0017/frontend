@@ -19,9 +19,9 @@ export class KeycloakService {
       try {
         // Initialize Keycloak
         this._keycloak = new Keycloak({
-          url: 'http://localhost:8080',
-          realm: 'demo-app',
-          clientId: 'demo',
+          url: 'http://localhost:9091',
+          realm: 'toothtrack',
+          clientId: 'toothtrack-app',
         });
   
         this._keycloak.init({ onLoad: 'login-required' }).then((authenticated) => {
@@ -75,4 +75,3 @@ export class KeycloakService {
   }
     
   
-
