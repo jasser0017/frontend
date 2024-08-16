@@ -4,7 +4,7 @@ import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { KeycloakService } from './services/keycloak.service';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withFetch } from '@angular/common/http';
 import { InterceptorService } from './services/interceptor.service';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
@@ -23,8 +23,13 @@ export const appConfig: ApplicationConfig = {
         useClass: InterceptorService,
         multi: true
       },
+      
+      
+      
     
     
   
-    provideClientHydration(), provideAnimationsAsync()]
+    provideClientHydration(), provideAnimationsAsync(),provideHttpClient(),
+    provideHttpClient(withFetch()), provideRouter(routes), provideClientHydration()
+  ]
 };

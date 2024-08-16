@@ -1,1 +1,28 @@
-<p>add-theropy works!</p>
+<div class="theropy-list">
+    
+    <mat-card class="theropy-card" *ngFor="let theropy of theropies" >
+        <div class="theropy-image">
+            <img [src]="theropy.processedImg"/>
+
+        </div>
+        <div class="theropy-details">
+
+        </div>
+        <div class="theropy-details">
+            <h2 class="theropy-name">{{theropy.name}}</h2>
+            <p class="theropy-description">{{theropy.discription}}</p>
+            <mat-divider></mat-divider>
+
+
+
+
+
+
+
+        </div>
+        
+
+    </mat-card>
+    
+
+</div>
