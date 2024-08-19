@@ -39,6 +39,8 @@ export class AppComponent implements OnInit{
           { path: 'admin/gestion-receptionist', label: 'Gerer Receptionist' },
           { path: 'admin/add-theropy', label: 'Gerer Therapis' },
           { path: 'admin/historique', label: 'Historique' }
+          
+          
         ];
       case 'receptionist':
         return [

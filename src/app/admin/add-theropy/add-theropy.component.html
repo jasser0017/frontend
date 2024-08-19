@@ -1,28 +1,22 @@
 <div class="theropy-list">
+    <button mat-raised-button color="primary" class="add-theropy-button" (click)="adTheropy()">Ajouter Theropy</button>
     
-    <mat-card class="theropy-card" *ngFor="let theropy of theropies" >
-        <div class="theropy-image">
-            <img [src]="theropy.processedImg"/>
-
+    <mat-card class="theropy-card" *ngFor="let theropy of theropies">
+      <div class="theropy-image">
+        <img [src]="'http://localhost:9000/images/' + theropy.image" alt="{{theropy.name}}"/>
+      </div>
+      <div class="theropy-details">
+        <h2 class="theropy-name">{{theropy.name}}</h2>
+        <p class="theropy-description">{{theropy.description}}</p>
+        <mat-divider></mat-divider>
+        <div class="actions">
+          <button mat-raised-button color="warn" class="delete-button" (click)="deleteTheropy(theropy.id)">
+            Supprimer
+          </button>
+          <button mat-raised-button color="primary" class="edit-button" (click)="editTheropy()">
+            Éditer
+          </button>
         </div>
-        <div class="theropy-details">
-
-        </div>
-        <div class="theropy-details">
-            <h2 class="theropy-name">{{theropy.name}}</h2>
-            <p class="theropy-description">{{theropy.discription}}</p>
-            <mat-divider></mat-divider>
-
-
-
-
-
-
-
-        </div>
-        
-
+      </div>
     </mat-card>
-    
-
-</div>
+  </div>

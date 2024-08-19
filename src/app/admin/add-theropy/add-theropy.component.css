@@ -1,0 +1,86 @@
+/* Style de la liste des thérapies pour affichage horizontal */
+.theropy-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px;
+  position: relative;
+}
+
+/* Style des cartes de thérapie */
+.theropy-card {
+  display: flex;
+  flex-direction: row;
+  flex: 1 1 calc(33.333% - 16px); /* Trois cartes par ligne avec un écart */
+  max-width: calc(33.333% - 16px); /* Assure que les cartes ne dépassent pas */
+  box-sizing: border-box;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
+}
+
+.theropy-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Style de l'image de la thérapie */
+.theropy-image img {
+  width: 100px; /* Ajustez la largeur de l'image selon vos besoins */
+  height: auto;
+}
+
+/* Style des détails de la thérapie */
+.theropy-details {
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.theropy-name {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.theropy-description {
+  margin: 8px 0;
+  color: #666;
+}
+
+/* Style de la ligne de séparation */
+mat-divider {
+  margin: 16px 0;
+}
+
+/* Style des actions (boutons) */
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+}
+
+/* Style des boutons */
+.actions button {
+  flex: 1;
+}
+
+/* Style du bouton Supprimer */
+.delete-button {
+  background-color: #f44336;
+  color: white;
+}
+
+/* Style du bouton Éditer */
+.edit-button {
+  background-color: #2196f3;
+  color: white;
+}
+
+/* Style du bouton Ajouter Thérapie */
+.add-theropy-button {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+}

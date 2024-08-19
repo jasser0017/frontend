@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators,ReactiveFormsModule} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from 'express';
+import { Router } from '@angular/router';
 import { AdminService } from '../admin.service';
-import { DemoAngular } from '../../DemoAngular';
 import { CommonModule } from '@angular/common';
+import { DemoAngular } from '../../DemoAngular';
 
 interface Treatment {
   id: number;
-  discription: string;  // Note: there's a typo here in the JSON. It should be "description".
+  description: string;
   name: string;
   image: string | null;
 }
@@ -16,71 +16,62 @@ interface Treatment {
 @Component({
   selector: 'app-add-theropy',
   standalone: true,
-  imports: [DemoAngular,CommonModule],
+  imports: [CommonModule,DemoAngular,ReactiveFormsModule],
   templateUrl: './add-theropy.component.html',
-  styleUrl: './add-theropy.component.css'
+  styleUrls: ['./add-theropy.component.css']
 })
-export class AddTheropyComponent implements OnInit{
+export class AddTheropyComponent implements OnInit {
 
-  theropies: any[] = [];
+  theropies: Treatment[] = [];
   searchProductForm!: FormGroup;
 
+  constructor(
+    private adminService: AdminService,
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar,
+    private router: Router
+  ) { }
 
-  constructor(private adminService: AdminService,
-     private fb : FormBuilder,private snackBar: MatSnackBar){
-
-  }
-
-  ngOnInit(){
+  ngOnInit(): void {
     this.getAllTheropies();
     this.searchProductForm = this.fb.group({
-      id:[null,[Validators.required]]
-    })
+      id: [null, [Validators.required]]
+    });
   }
 
-  getAllTheropies(){
-    this.theropies =[];
-
-    this.adminService.getAllTheropies().subscribe
-    ((res: Treatment[]) => {
-      // Directly assign the result to the component property
-      this.theropies = res;
-
-      console.log(this.theropies);
-    })
- 
-
-
-  }
-
-  submitForm(){
-    this.theropies =[];
-    const id = this.searchProductForm.get('id')!.value;
-    this.adminService.getTheropyById(id).subscribe(res=>{
-      res.forEach(element =>{
-        element.processedImg = "data:image/jpeg;base64" +
-        element.image;
-        this.theropies.push(element);
-        
-      })
-    })
-  }
-
-  deleteTheropy(id:any){
-    this.adminService.deleteTheropy(id).subscribe(res=>{
-      if(res.body == null){
-        this.snackBar.open('Theropy supprimee avec succes','Close',{
-          duration:5000
-        });
-        this.getAllTheropies();
-      }else{
-        this.snackBar.open(res.message, 'Close',{
-          duration: 5000,
-          panelClass: "erroe-snackbar"
-        });
+  getAllTheropies(): void {
+    this.adminService.getAllTheropies().subscribe(
+      (res: Treatment[]) => {
+        this.theropies = res;
+        console.log(this.theropies);
+      },
+      error => {
+        console.error('Erreur lors de la récupération des therapies', error);
       }
-    })
+    );
   }
+
+
+  deleteTheropy(id: number): void {
+    this.adminService.deleteTheropy(id).subscribe(
+      () => {
+        this.snackBar.open('Theropy supprimée avec succès', 'Fermer', { duration: 5000 });
+        this.getAllTheropies();
+      },
+      error => {
+        this.snackBar.open('Erreur lors de la suppression', 'Fermer', { duration: 5000 });
+      }
+    );
+  }
+  editTheropy() {
+    // Naviguer vers le composant de mise à jour avec les détails de Theropy
+    this.router.navigate(['/admin/update-theropy']);
+  }
+
+  adTheropy(){
+    this.router.navigate(['/admin/post-theropy']);
+  }
+}
 
 
 
@@ -96,4 +87,4 @@ export class AddTheropyComponent implements OnInit{
   
 
 
-}
+

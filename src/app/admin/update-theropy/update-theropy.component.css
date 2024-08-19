@@ -1,0 +1,103 @@
+/* Style de la container principale */
+.container {
+    max-width: 600px; /* Largeur maximale du conteneur */
+    margin: 0 auto; /* Centrage horizontal */
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 8px;
+  }
+  
+  /* Style pour les en-têtes */
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Style pour le conteneur de téléchargement de fichier */
+  .file-upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .file-upload-label {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border: 2px dashed #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    position: relative; /* Pour positionner l'icône correctement */
+  }
+  
+  .file-upload-label span {
+    margin-bottom: 10px;
+  }
+  
+  #fileInput {
+    display: none; /* Cache l'input de fichier */
+  }
+  
+  .mat-icon {
+    margin-top: 10px;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  /* Style pour la prévisualisation de l'image */
+  .image-preview {
+    margin-top: 10px;
+  }
+  
+  .preview-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+  
+  /* Style des champs de formulaire */
+  .form-field {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  /* Style des boutons */
+  button {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  /* Styles de la gestion des erreurs */
+  mat-error {
+    color: #f44336; /* Couleur de l'erreur */
+    font-size: 12px;
+  }
+  
+  /* Styles réactifs */
+  @media (max-width: 768px) {
+    .container {
+      padding: 10px;
+    }
+  
+    .file-upload-label {
+      padding: 8px;
+    }
+  
+    .form-field {
+      margin-bottom: 15px;
+    }
+  
+    .mat-icon {
+      font-size: 20px;
+    }
+  
+    button {
+      margin-top: 15px;
+    }
+  }
+  
