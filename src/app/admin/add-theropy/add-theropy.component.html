@@ -3,7 +3,7 @@
     
     <mat-card class="theropy-card" *ngFor="let theropy of theropies">
       <div class="theropy-image">
-        <img [src]="'http://localhost:9000/images/' + theropy.image" alt="{{theropy.name}}"/>
+        <img [src]="theropy.imgUrl" alt="{{theropy.name}}" />
       </div>
       <div class="theropy-details">
         <h2 class="theropy-name">{{theropy.name}}</h2>

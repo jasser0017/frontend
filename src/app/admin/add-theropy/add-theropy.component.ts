@@ -10,7 +10,7 @@ interface Treatment {
   id: number;
   description: string;
   name: string;
-  image: string | null;
+  imgUrl: string | null;
 }
 
 @Component({
