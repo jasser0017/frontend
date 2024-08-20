@@ -26,6 +26,16 @@ export class AdminService {
     return this.http.delete(`${BASIC_URL}/theropies/${id}`);
   }
 
+  updateTheropy(id: number, theropyDTO: any): Observable<any> {
+    const formData = new FormData();
+    formData.append('name', theropyDTO.name);
+    formData.append('description', theropyDTO.description);
+    if (theropyDTO.img) {
+      formData.append('img', theropyDTO.img);
+    }
+  
+    return this.http.put(`${BASIC_URL}/theropies/update/${id}`, formData);
+  }
   
 }
 

@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'gestion-receptionist', component: GestionReceptionistComponent },
   { path: 'add-theropy', component: AddTheropyComponent },
   {path: 'post-theropy',component: PostTheropyComponent},
-  {path: 'update-theropy',component:UpdateTheropyComponent}
+  { path: 'update-theropy/:id', component: UpdateTheropyComponent }
 ];
 
 @NgModule({

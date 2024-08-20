@@ -1,30 +1,29 @@
 <div class="container">
-    <h2>Modifier Theropy</h2>
-  
-    <form >
-      <div class="file-upload-container">
-        <label class="file-upload-label">
-          <span>Choisissez un fichier</span>
-          <input type="file" id="fileInput" >
-          <mat-icon>attacher un fichier</mat-icon>
-        </label>
-        <div  class="image-preview">
-          <img  class="preview-image"/>
-        </div>
+  <h2>Modifier Theropy</h2>
+  <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+    <div class="file-upload-container">
+      <label class="file-upload-label">
+        <span>Choisissez un fichier</span>
+        <input type="file" id="fileInput" (change)="onFileChange($event)">
+        <mat-icon>attach_file</mat-icon>
+      </label>
+      <div class="image-preview" *ngIf="imageUrl">
+        <img [src]="imageUrl" class="preview-image"/>
       </div>
-      <mat-form-field appearance="outline" class="form-field">
-        <mat-label>Name</mat-label>
-        <input matInput type="text" placeholder="Name" formControlName="name"/>
-        <mat-error ></mat-error>
-      </mat-form-field>
-  
-      <mat-form-field appearance="outline" class="form-field">
-        <mat-label>Description</mat-label>
-        <input matInput type="text" placeholder="Description" formControlName="description"/> 
-        <mat-error >Ce champ est Obligatoire!</mat-error>
-      </mat-form-field>
-  
-      <button mat-raised-button color="primary" type="submit">Mettre à jour Theropy</button>
-    </form>
-  </div>
-  
+    </div>
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Name</mat-label>
+      <input matInput type="text" placeholder="Name" formControlName="name"/>
+      <mat-error *ngIf="updateForm.get('name')?.hasError('required')">Ce champ est Obligatoire!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Description</mat-label>
+      <input matInput type="text" placeholder="Description" formControlName="description"/>
+      <mat-error *ngIf="updateForm.get('description')?.hasError('required')">Ce champ est Obligatoire!</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Mettre à jour Theropy</button>
+  </form>
+</div>
+

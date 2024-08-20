@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AdminService } from '../admin.service';
 import { CommonModule } from '@angular/common';
 import { DemoAngular } from '../../DemoAngular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-theropy',
@@ -21,7 +22,8 @@ export class PostTheropyComponent {
   constructor(
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private router : Router
   ) {}
 
   ngOnInit(): void {
@@ -62,7 +64,11 @@ export class PostTheropyComponent {
         (error) => {
           this.snackBar.open('Erreur lors de l\'ajout de la Theropy', 'Fermer', { duration: 5000 });
         }
+        
+        
       );
+      this.router.navigate(['/admin/add-theropy']);
+    
     } else {
       this.theropyForm.markAllAsTouched();
     }

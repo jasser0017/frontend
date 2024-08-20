@@ -63,10 +63,11 @@ export class AddTheropyComponent implements OnInit {
       }
     );
   }
-  editTheropy() {
-    // Naviguer vers le composant de mise à jour avec les détails de Theropy
-    this.router.navigate(['/admin/update-theropy']);
+  editTheropy(id: number): void {
+    // Naviguer vers le composant de mise à jour avec l'ID de Theropy
+    this.router.navigate(['/admin/update-theropy', id]);
   }
+  
 
   adTheropy(){
     this.router.navigate(['/admin/post-theropy']);
