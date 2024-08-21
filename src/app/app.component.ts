@@ -44,7 +44,7 @@ export class AppComponent implements OnInit{
         ];
       case 'receptionist':
         return [
-          { path: 'receptionist/gestionrdv', label: 'Gerer Rendez-Vous' }
+          { path: 'secretaire/gerer-rendez-vous', label: 'Gerer Rendez-Vous' }
         ];
       case 'patient':
         return [

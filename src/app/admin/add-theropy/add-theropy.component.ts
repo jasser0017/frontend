@@ -23,20 +23,20 @@ interface Treatment {
 export class AddTheropyComponent implements OnInit {
 
   theropies: Treatment[] = [];
-  searchProductForm!: FormGroup;
+  /*searchProductForm!: FormGroup;*/
 
   constructor(
     private adminService: AdminService,
-    private fb: FormBuilder,
+    /*private fb: FormBuilder,*/
     private snackBar: MatSnackBar,
     private router: Router
   ) { }
 
   ngOnInit(): void {
     this.getAllTheropies();
-    this.searchProductForm = this.fb.group({
+    /*this.searchProductForm = this.fb.group({
       id: [null, [Validators.required]]
-    });
+    });*/
   }
 
   getAllTheropies(): void {

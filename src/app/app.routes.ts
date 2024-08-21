@@ -12,6 +12,8 @@ export const routes: Routes = [
     { path: 'patient', loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule) },
     { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
     { path: 'header', loadChildren: () => import('./header/header.module').then(m => m.HeaderModule) },
+    { path: 'secretaire', loadChildren: () => import('./secretaire/secretaire.module').then(m => m.SecretaireModule) },
+    
 
 
     { path: '**', redirectTo: '' },

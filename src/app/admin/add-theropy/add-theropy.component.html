@@ -1,22 +1,19 @@
-<div class="theropy-list">
-    <button mat-raised-button color="primary" class="add-theropy-button" (click)="adTheropy()">Ajouter Theropy</button>
-    
-    <mat-card class="theropy-card" *ngFor="let theropy of theropies">
-      <div class="theropy-image">
-        <img [src]="theropy.imgUrl" alt="{{theropy.name}}" />
-      </div>
-      <div class="theropy-details">
-        <h2 class="theropy-name">{{theropy.name}}</h2>
-        <p class="theropy-description">{{theropy.description}}</p>
-        <mat-divider></mat-divider>
-        <div class="actions">
-          <button mat-raised-button color="warn" class="delete-button" (click)="deleteTheropy(theropy.id)">
-            Supprimer
-          </button>
-          <button mat-raised-button color="primary" class="edit-button" (click)="editTheropy(theropy.id)">
-            Éditer
-          </button>
+<div class="container mt-4">
+  <button class="btn btn-primary mb-3" (click)="adTheropy()">Ajouter Theropy</button>
+  
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let theropy of theropies">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" [src]="theropy.imgUrl" alt="{{theropy.name}}">
+        <div class="card-body">
+          <h5 class="card-title">{{theropy.name}}</h5>
+          <p class="card-text">{{theropy.description}}</p>
+          <div class="d-flex justify-content-between">
+            <button class="btn btn-danger" (click)="deleteTheropy(theropy.id)">Supprimer</button>
+            <button class="btn btn-primary" (click)="editTheropy(theropy.id)">Éditer</button>
+          </div>
         </div>
       </div>
-    </mat-card>
+    </div>
   </div>
+</div>

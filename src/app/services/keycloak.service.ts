@@ -28,6 +28,7 @@ export class KeycloakService {
           if (authenticated) {
             console.log(this._keycloak.token)
             this.storageService.setRoles(this._keycloak.tokenParsed.realm_access.roles);
+            this.getUserProfile();
           } else {
             // This block is redundant with 'login-required', but you can use it for additional handling if needed
             console.log('User is not authenticated.');
@@ -67,6 +68,17 @@ export class KeycloakService {
         map(() => this._keycloak?.token || ''),
         map(token => token)
       );
+    }
+
+    getUserProfile() {
+      console.log(this._keycloak.tokenParsed)
+      console.log(this._keycloak.userInfo)
+      const tokenParsed = this._keycloak.tokenParsed;
+const name = tokenParsed['name'];
+const email = tokenParsed['email'];;
+localStorage.setItem('name' , name)
+localStorage.setItem('email', email)
+      return this._keycloak.loadUserProfile();
     }
   
   

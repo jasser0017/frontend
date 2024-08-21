@@ -7,3 +7,4 @@ export class User {
     lastName?: string;
     username?: string;
   }
+  
