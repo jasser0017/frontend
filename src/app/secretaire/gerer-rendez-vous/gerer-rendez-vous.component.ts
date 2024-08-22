@@ -25,6 +25,7 @@ export class GererRendezVousComponent implements OnInit {
     this.receptionistService.getAllAppointments().subscribe(
       (data: any) => {
         this.appointments = data;
+        console.log(this.appointments);
       },
       error => {
         console.error('Erreur lors de la récupération des rendez-vous', error);

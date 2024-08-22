@@ -72,12 +72,14 @@ export class KeycloakService {
 
     getUserProfile() {
       console.log(this._keycloak.tokenParsed)
-      console.log(this._keycloak.userInfo)
+      
       const tokenParsed = this._keycloak.tokenParsed;
-const name = tokenParsed['name'];
-const email = tokenParsed['email'];;
+const lastName = tokenParsed['family_name'];
+const email = tokenParsed['email'];
+const name = tokenParsed['given_name']
 localStorage.setItem('name' , name)
 localStorage.setItem('email', email)
+localStorage.setItem('lastName',lastName)
       return this._keycloak.loadUserProfile();
     }
   

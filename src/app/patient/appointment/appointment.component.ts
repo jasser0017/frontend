@@ -49,24 +49,27 @@ export class AppointmentComponent implements OnInit {
 
   onSubmit(): void {
     
-    const name=localStorage.getItem('name')
+    const firstName1=localStorage.getItem('name')
     const email =localStorage.getItem('email')
-    
+    const lastName =localStorage.getItem('lastName')
+
+
+    console.log(lastName)
+    console.log(firstName1)
     console.log(email)
-    if (this.appointment.user) {
-      this.appointment.user.email = email;
-  } else {
-      this.appointment.user = { email: email };
-  }
   if (this.appointment.user) {
-    this.appointment.user.firstName = name;
-} else {
-    this.appointment.user = { firstName: name };
-}
-    
+      this.appointment.user.email = email;
+      this.appointment.user.firstname = firstName1;
+      this.appointment.user.lastname = lastName;
+  } else {
+      this.appointment.user = { email: email,firstname:firstName1,lastname:lastName };
+  };
+  
+  
     console.log(this.appointment)
     this.patientService.createAppointment(this.appointment).subscribe(response => {
-      console.log('Appointment created:', response);
+      console.log('Appointment created:',response);
+      console.log(this.appointment);
       this.snackBar.open('Appointment created successfully!', 'Close', { duration: 3000 });
     }, error => {
       console.error('Error creating appointment', error);

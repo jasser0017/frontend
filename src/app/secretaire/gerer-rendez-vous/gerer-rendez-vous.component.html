@@ -1,31 +1,29 @@
 <div class="container">
-    <h2>Gestion des Rendez-vous</h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Date</th>
-          
-          <th>Utilisateur</th>
-          <th>Thérapie</th>
-          <th>Statut</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let appointment of appointments">
-          <td>{{ appointment.id }}</td>
-          <td>{{ appointment.date | date }}</td>
-          
-          <td>{{ appointment.user?.name }}</td>
-          <td>{{ appointment.theropyName }}</td>
-          <td>{{ appointment.status }}</td>
-          <td>
-            <button (click)="accept(appointment.id)" class="btn btn-success" [disabled]="appointment.status !== 'Pending'">Accepter</button>
-            <button (click)="reject(appointment.id)" class="btn btn-danger" [disabled]="appointment.status !== 'Pending'">Rejeter</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
+  <h2>Gestion des Rendez-vous</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Utilisateur</th>
+        <th>Thérapie</th>
+        <th>Statut</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let appointment of appointments">
+        <td>{{ appointment.id }}</td>
+        <td>{{ appointment.date | date }}</td>
+        <td>{{ appointment.user.firstname }} {{ appointment.user.lastname }}</td>
+        <td>{{ appointment.theropyId }}</td> 
+        <td>{{ appointment.status }}</td>
+        <td>
+          <button (click)="accept(appointment.id)" class="btn btn-success" [disabled]="appointment.status !== 'Pending'">Accepter</button>
+          <button (click)="reject(appointment.id)" class="btn btn-danger" [disabled]="appointment.status !== 'Pending'">Rejeter</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
