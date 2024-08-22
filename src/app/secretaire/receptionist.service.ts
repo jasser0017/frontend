@@ -24,4 +24,7 @@ export class ReceptionistService {
   rejectAppointment(id: number): Observable<any> {
     return this.http.post(`${BASIC_URL}/appointments/${id}/reject`, {});
   }
+  getAllTheropies(): Observable<any> {
+    return this.http.get(`${BASIC_URL}/theropies/getAll`);
+  }
 }

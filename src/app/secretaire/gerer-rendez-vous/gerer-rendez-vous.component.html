@@ -16,7 +16,7 @@
         <td>{{ appointment.id }}</td>
         <td>{{ appointment.date | date }}</td>
         <td>{{ appointment.user.firstname }} {{ appointment.user.lastname }}</td>
-        <td>{{ appointment.theropyId }}</td> 
+        <td>{{ getTherapyName(appointment.theropyId) }}</td> 
         <td>{{ appointment.status }}</td>
         <td>
           <button (click)="accept(appointment.id)" class="btn btn-success" [disabled]="appointment.status !== 'Pending'">Accepter</button>

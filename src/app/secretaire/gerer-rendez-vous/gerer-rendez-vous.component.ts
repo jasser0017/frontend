@@ -3,6 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DemoAngular } from '../../DemoAngular';
 import { ReceptionistService } from '../receptionist.service';
+import { Console } from 'console';
+interface Treatment {
+  id: number;
+  description: string;
+  name: string;
+  imgUrl: string | null;
+}
 
 @Component({
   selector: 'app-gerer-rendez-vous',
@@ -14,11 +21,13 @@ import { ReceptionistService } from '../receptionist.service';
 export class GererRendezVousComponent implements OnInit {
 
   appointments: any[] = [];
+  therapies: any[] = [];
 
   constructor(private receptionistService: ReceptionistService) {}
 
   ngOnInit(): void {
     this.loadAppointments();
+    this.loadTherapies(); 
   }
 
   loadAppointments(): void {
@@ -31,6 +40,25 @@ export class GererRendezVousComponent implements OnInit {
         console.error('Erreur lors de la récupération des rendez-vous', error);
       }
     );
+  }
+
+  loadTherapies():void{
+      this.receptionistService.getAllTheropies().subscribe(
+        (res: Treatment[]) => {
+          this.therapies = res;
+          console.log(this.therapies);
+        },
+        error => {
+          console.error('Erreur lors de la récupération des therapies', error);
+        }
+      );
+    
+  }
+  getTherapyName(theropyId: number): string {
+    const therapy = this.therapies.find(t => t.id === theropyId);
+    console.log(theropyId);
+    console.log(this.therapies);
+    return therapy ? therapy.name : 'Inconnu'; // Default to 'Unknown' if not found
   }
 
   accept(id: number): void {
